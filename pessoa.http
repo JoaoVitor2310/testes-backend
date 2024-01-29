@@ -1,0 +1,9 @@
+POST http://localhost:3000/pessoa/create
+Content-Type: application/json
+
+{
+    "nome": "João",
+    "cpf": "123456789-10"
+}
+
+###
