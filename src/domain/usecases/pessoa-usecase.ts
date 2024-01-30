@@ -3,12 +3,12 @@ import { Pessoa } from "../entities/pessoa";
 import { IRegistrarPessoaUsecase } from "./iregistrar-pessoa-usecase";
 
 
-export interface Params_RegistrarPessoaUsecase {
+export interface Params_RegistrarPessoaUsecase { // Não usar
     nome: string;
     cpf: number;
 }
 
-export interface Retorno_RegistrarPessoaUsecase {
+export interface Retorno_RegistrarPessoaUsecase { // Não usar
     id: number;
     nome: string;
     cpf: number;
