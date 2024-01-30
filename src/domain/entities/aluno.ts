@@ -1,9 +1,10 @@
-import { Curso } from "./curso";
-import { Disciplina } from "./disciplina";
-import { Nota } from "./nota";
+// import { Curso } from "./curso";
+// import { Disciplina } from "./disciplina";
+// import { Nota } from "./nota";
 
 class Aluno{
     id: number;
+    rg: string;
     matricula: string;
     nome: string;
     email: string;
@@ -14,6 +15,7 @@ class Aluno{
     periodo: number;
     // historico: Nota[];
     historico: number[];
+    idCampus: number;
 }
 
 export { Aluno }
