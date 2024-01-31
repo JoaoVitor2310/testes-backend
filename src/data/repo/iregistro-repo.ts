@@ -7,5 +7,6 @@ interface IRegistroRepository<E extends Registro> extends IRepository<E>  {
     update(id: number, entidade: Partial<E>): Promise<E | Error>;
     delete(id: number): Promise<boolean | Error>;
     findByRG(rg: string): Promise<E | Error>;
+    findById(id: string): Promise<E | Error>;
 }
 export { IRegistroRepository }

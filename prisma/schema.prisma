@@ -1,0 +1,107 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = "file:./dev.db"
+}
+
+model Registro {
+  id          Int      @id @map("_id")
+  alunos      Aluno[]
+  idCampus    Int
+  professores Professor[] 
+  diretores   Diretor[]   
+  reitores    Reitor[]    
+  cursos      Curso[]
+  disciplinas Disciplina[]
+  notas       Nota[]      
+}
+
+model Aluno {
+  id          Int      @id @map("_id")
+  rg          String
+  matricula   String
+  nome        String
+  email       String   @unique
+  curso       String
+  disciplinas String[]
+  periodo     Int
+  historico   Int[]
+  registro    Registro   @relation(fields: [registroId], references: [id])
+  registroId  Int
+}
+
+model Curso {
+  id            Int      @id @map("_id")
+  nome          String
+  cargaHoraria  Int
+  periodos      Int
+  coordenador   String
+  registro    Registro   @relation(fields: [registroId], references: [id])
+  registroId  Int
+  professores Professor[]
+}
+
+model Professor {
+  id             Int       @id @map("_id")
+  nome           String
+  email          String    @unique
+  cursos         Curso @relation(fields: [cursoId], references: [id])
+  cursoId        Int
+  disciplina     String
+  cargaHoraria   Int
+  salario        Float
+  registro    Registro   @relation(fields: [registroId], references: [id])
+  registroId  Int
+}
+
+model Diretor {
+  id      Int    @id @map("_id")
+  nome    String
+  email   String @unique
+  salario Float
+  registro    Registro   @relation(fields: [registroId], references: [id])
+  registroId  Int
+}
+
+model Disciplina {
+  id                Int      @id @map("_id")
+  nome              String
+  cargaHoraria      Int
+  periodo           Int
+  professor         String
+  curso             String
+  preRequisitos     String[]
+  alunosMatriculados String[]
+  sala              String
+  horario           String
+  registro    Registro   @relation(fields: [registroId], references: [id])
+  registroId  Int
+  nota               Nota @relation(fields: [notaId], references: [id])
+  notaId Int @unique
+}
+
+model Nota {
+  id          Int       @id @map("_id")
+  disciplina  Disciplina?
+  disciplinaId Int
+  valor       Int
+  aluno       String
+  registro    Registro   @relation(fields: [registroId], references: [id])
+  registroId  Int
+}
+
+
+model Reitor {
+  id       Int    @id @map("_id")
+  nome     String
+  email    String @unique
+  salario  Float
+  registro    Registro   @relation(fields: [registroId], references: [id])
+  registroId  Int
+}
